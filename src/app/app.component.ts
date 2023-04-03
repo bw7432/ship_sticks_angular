@@ -18,6 +18,7 @@ export class AppComponent implements OnInit{
   products: any = [];
   name: any = false;
   showName: any = false;
+  showError: any = false;
 
   checkoutForm = this.formBuilder.group({
     typeOf: ['', Validators.required],
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit{
   }
 
   async getProducts() {
+    this.showError = false
     console.log(this.checkoutForm.get('typeOf')?.value)
     var type_of = this.checkoutForm.get('typeOf')!.value;
     var length = this.checkoutForm.get('length')!.value;
@@ -40,12 +42,17 @@ export class AppComponent implements OnInit{
     var weight = this.checkoutForm.get('weight')!.value;
     var data = await this.apiService.get(`/api/v1/products?type_of=${type_of}&length=${length}&width=${width}&height=${height}&weight=${weight}`).toPromise()
     this.products = data;
-    this.name = this.products['data'][0]['name']
-    // wait 5 seconds, close modal, set text on main page
-    setTimeout(() => {
-      console.log('sleep');
-      this.showName = true;
-      document.getElementById("close_modal")?.click();
-    }, 5000);
+    console.log(this.products['data'])
+    if (this.products['data'].length > 0) {
+      this.name = this.products['data'][0]['name']
+      // wait 5 seconds, close modal, set text on main page
+      setTimeout(() => {
+        console.log('sleep');
+        this.showName = true;
+        document.getElementById("close_modal")?.click();
+      }, 5000);
+    } else {
+      this.showError = true
+    }
   }
 }

@@ -34,9 +34,15 @@
         <form [formGroup]="checkoutForm">
           <div>
             <label for="typeOf">
-              Type Of
+              Package Type
             </label>
-            <input id="typeOf" type="text" formControlName="typeOf" class="form-control" required>
+            <select class="form-control" formControlName="typeOf">
+              <option value="">Please select a package type</option>
+              <option value="golf">Golf</option>
+              <option value="ski">Ski</option>
+              <option value="luggage">Luggage</option>
+            </select>
+            <!-- <input id="typeOf" type="select" formControlName="typeOf" class="form-control" required> -->
           </div>
           <div>
             <label for="length">
@@ -67,6 +73,7 @@
         
         </form>
         <br>
+        <p *ngIf="showError" class="danger">Sorry, we could not find a package.</p>
         <p *ngIf="name">{{name}}</p>
       </div>
       <div class="modal-footer">
