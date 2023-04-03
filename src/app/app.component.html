@@ -20,6 +20,7 @@
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Launch demo modal
 </button>
+<p *ngIf="showName">{{name}}</p>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -69,7 +70,7 @@
         <p *ngIf="name">{{name}}</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button id="close_modal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" (click)="getProducts()" class="btn btn-primary" [disabled]="!checkoutForm.valid">Save changes {{checkoutForm.valid}}</button>
       </div>
     </div>
