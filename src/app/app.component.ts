@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-import { Observable } from 'rxjs';
+import { Observable, lastValueFrom } from 'rxjs';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -40,7 +40,8 @@ export class AppComponent implements OnInit{
     var width = this.checkoutForm.get('width')!.value;
     var height = this.checkoutForm.get('height')!.value;
     var weight = this.checkoutForm.get('weight')!.value;
-    var data = await this.apiService.get(`/api/v1/products?type_of=${type_of}&length=${length}&width=${width}&height=${height}&weight=${weight}`).toPromise()
+    var data$ = this.apiService.get(`/api/v1/products?type_of=${type_of}&length=${length}&width=${width}&height=${height}&weight=${weight}`)
+    var data = await lastValueFrom(data$);
     this.products = data;
     console.log(this.products['data'])
     if (this.products['data'].length > 0) {
