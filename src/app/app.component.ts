@@ -31,6 +31,7 @@ export class AppComponent implements OnInit{
   }
 
   async getProducts() {
+    this.showName = false;
     this.showError = false
     console.log(this.checkoutForm.get('typeOf')?.value)
     var length = this.checkoutForm.get('length')!.value;
