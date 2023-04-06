@@ -20,6 +20,7 @@
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Launch demo modal
 </button>
+<p *ngIf="showError" class="danger">Sorry, we could not find a package.</p>
 <p *ngIf="showName">{{name}}</p>
 
 <!-- Modal -->
@@ -32,7 +33,7 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="checkoutForm">
-          <div>
+          <!-- <div>
             <label for="typeOf">
               Package Type
             </label>
@@ -42,8 +43,7 @@
               <option value="ski">Ski</option>
               <option value="luggage">Luggage</option>
             </select>
-            <!-- <input id="typeOf" type="select" formControlName="typeOf" class="form-control" required> -->
-          </div>
+          </div> -->
           <div>
             <label for="length">
               Length
